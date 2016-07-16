@@ -54,7 +54,19 @@ var purchaseGo = function() {
                         message: "How many would you like to buy?"
                     }).then(function(answer) {
                         console.log("do math here");
-                        
+                       if (chosenItem.StockQuantity < parseInt(answer.buy)) {
+                            connection.query("UPDATE auctions SET ? WHERE ?", [{
+                                highestbid: answer.bid
+                            }, {
+                                id: chosenItem.id
+                            }], function(err, res) {
+                                console.log("Thank you for your purchase!");
+                                start();
+                            });
+                        } else {
+                            console.log("none in stock, you'll have to wait for the next shipment");
+                            start();
+                        }
                     })
                 }
             }
