@@ -54,15 +54,14 @@ var purchaseGo = function() {
                         message: "How many would you like to buy?"
                     }).then(function(answer) {
                         console.log("do math here");
-                       if (chosenItem.StockQuantity < parseInt(answer.buy)) {
-                            connection.query("UPDATE auctions SET ? WHERE ?", [{
-                                highestbid: answer.bid
-                            }, {
-                                id: chosenItem.id
-                            }], function(err, res) {
-                                console.log("Thank you for your purchase!");
-                                start();
-                            });
+                        console.log("chosenItem.StockQuantity = "+ chosenItem.StockQuantity);
+                        console.log("parseInt(answer.buy) = " + parseInt(answer.buy));
+                       if (chosenItem.StockQuantity > parseInt(answer.buy)) {
+                            var newStockQty = chosenItem.StockQuantity -parseInt(answer.buy);
+                            console.log(newStockQty);
+                            console.log(chosenItem.id);
+                            connection.query("UPDATE Products SET StockQuantity="+newStockQty+" WHERE id = "+chosenItem.id);
+                            // console.log("you smell");
                         } else {
                             console.log("none in stock, you'll have to wait for the next shipment");
                             start();
