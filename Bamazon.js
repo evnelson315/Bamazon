@@ -61,6 +61,7 @@ var purchaseGo = function() {
                             console.log(newStockQty);
                             console.log(chosenItem.id);
                             connection.query("UPDATE Products SET StockQuantity="+newStockQty+" WHERE id = "+chosenItem.id);
+                            start();
                             // console.log("you smell");
                         } else {
                             console.log("none in stock, you'll have to wait for the next shipment");
