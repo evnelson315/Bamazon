@@ -39,17 +39,17 @@ var purchaseGo = function() {
             choices: function(value) {
                 var choiceArray = [];
                 for (var i = 0; i < res.length; i++) {
-                    choiceArray.push(res[i].id);
+                    choiceArray.push(res[i].ProductName);
                 }
                 return choiceArray;
             },
             message: "What item would you like to purchase?"
         }).then(function(answer) {
             for (var i = 0; i < res.length; i++) {
-                if (res[i].productname == answer.choice) {
+                if (res[i].ProductName== answer.choice) {
                     var chosenItem = res[i];
                     inquirer.prompt({
-                        name: i,
+                        name: "buy",
                         type: "input",
                         message: "How many would you like to buy?"
                     }).then(function(answer) {
